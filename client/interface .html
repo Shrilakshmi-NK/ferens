@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Code Comparator</title>
 
-  <!-- CodeMirror CSS & JS -->
+  <!-- CodeMirror -->
   <link rel="stylesheet" href="https://unpkg.com/codemirror@5.65.14/lib/codemirror.css">
   <script src="https://unpkg.com/codemirror@5.65.14/lib/codemirror.js"></script>
   <script src="https://unpkg.com/codemirror@5.65.14/mode/javascript/javascript.js"></script>
-
-  <!-- jsdiff for line-by-line diff -->
-  <script src="https://cdn.jsdelivr.net/npm/diff@5.1.0/dist/diff.min.js"></script>
+  <script src="https://unpkg.com/codemirror@5.65.14/mode/python/python.js"></script>
+  <script src="https://unpkg.com/codemirror@5.65.14/mode/clike/clike.js"></script>
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -19,8 +18,14 @@
   <div class="ribbon">
     <h1>Code Comparator</h1>
     <div>
+      <select id="languageSelector" class="compare-btn" onchange="changeLanguage()">
+        <option value="javascript">JavaScript</option>
+        <option value="python">Python</option>
+        <option value="clike">C++</option>
+      </select>
       <button class="compare-btn" onclick="compareCode()">Compare</button>
       <button class="compare-btn" onclick="viewHistory()">View History</button>
+      <button class="compare-btn" onclick="clearHistory()">Clear History</button>
     </div>
   </div>
 
