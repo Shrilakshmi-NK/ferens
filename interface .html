@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Code Comparison Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="ribbon">
+    <h1>Code Comparator</h1>
+    <button class="compare-btn" onclick="compareCode()">Compare</button>
+  </div>
+
+  <div class="container">
+    <div class="code-box">
+      <label for="originalCode">Original Code</label>
+      <textarea id="originalCode" placeholder="Paste correct code here..."></textarea>
+    </div>
+    <div class="code-box">
+      <label for="userCode">User's Code</label>
+      <textarea id="userCode" placeholder="Paste your code here..."></textarea>
+    </div>
+  </div>
+
+  <div id="result"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
