@@ -4,13 +4,19 @@
   <meta charset="UTF-8" />
   <title>Code Comparator</title>
 
-  <!-- CodeMirror -->
+  <!-- CodeMirror Styles -->
   <link rel="stylesheet" href="https://unpkg.com/codemirror@5.65.14/lib/codemirror.css">
+  
+  <!-- CodeMirror Scripts -->
   <script src="https://unpkg.com/codemirror@5.65.14/lib/codemirror.js"></script>
   <script src="https://unpkg.com/codemirror@5.65.14/mode/javascript/javascript.js"></script>
   <script src="https://unpkg.com/codemirror@5.65.14/mode/python/python.js"></script>
   <script src="https://unpkg.com/codemirror@5.65.14/mode/clike/clike.js"></script>
 
+  <!-- Optional Theme -->
+  <link rel="stylesheet" href="https://unpkg.com/codemirror@5.65.14/theme/material.css">
+
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -40,7 +46,7 @@
     </div>
   </div>
 
-  <div id="result"></div>
+  <div id="result" style="margin: 20px; padding: 10px; background-color: #f9f9f9; border-radius: 8px;"></div>
 
   <script src="script.js"></script>
 </body>
