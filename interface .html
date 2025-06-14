@@ -2,24 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Code Comparison Tool</title>
+  <title>Code Comparator</title>
+
+  <!-- CodeMirror CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/codemirror@5.65.14/lib/codemirror.css">
+  <script src="https://unpkg.com/codemirror@5.65.14/lib/codemirror.js"></script>
+  <script src="https://unpkg.com/codemirror@5.65.14/mode/javascript/javascript.js"></script>
+
+  <!-- jsdiff for line-by-line diff -->
+  <script src="https://cdn.jsdelivr.net/npm/diff@5.1.0/dist/diff.min.js"></script>
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="ribbon">
     <h1>Code Comparator</h1>
-    <button class="compare-btn" onclick="compareCode()">Compare</button>
+    <div>
+      <button class="compare-btn" onclick="compareCode()">Compare</button>
+      <button class="compare-btn" onclick="viewHistory()">View History</button>
+    </div>
   </div>
 
   <div class="container">
     <div class="code-box">
       <label for="originalCode">Original Code</label>
-      <textarea id="originalCode" placeholder="Paste correct code here..."></textarea>
+      <textarea id="originalCode"></textarea>
     </div>
     <div class="code-box">
       <label for="userCode">User's Code</label>
-      <textarea id="userCode" placeholder="Paste your code here..."></textarea>
+      <textarea id="userCode"></textarea>
     </div>
   </div>
 
