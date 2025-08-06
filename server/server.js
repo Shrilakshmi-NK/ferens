@@ -37,13 +37,24 @@ app.get('/history', async (req, res) => {
   }
 });
 
-// ✅ Clear history
+// ✅ Clear all history
 app.delete('/clear', async (req, res) => {
   try {
     await History.deleteMany({});
     res.json({ message: "🗑️ History cleared!" });
   } catch (error) {
     res.status(500).json({ message: "❌ Failed to clear history", error });
+  }
+});
+
+// ✅ Delete a specific history entry by ID
+app.delete('/delete-history/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await History.findByIdAndDelete(id);
+    res.status(200).json({ message: "✅ Deleted" });
+  } catch (error) {
+    res.status(500).json({ error: "❌ Delete failed" });
   }
 });
 
