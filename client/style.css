@@ -124,3 +124,38 @@ body {
   transform: scale(1.2);
   cursor: pointer;
 }
+/* Tooltip wrapper */
+.history-tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip wrapper */
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip box */
+.tooltip-reminder {
+  display: none;
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff8e1;
+  color: #8a6d3b;
+  font-size: 12px;
+  padding: 6px 10px;
+  border: 1px solid #ffe58f;
+  border-radius: 5px;
+  white-space: nowrap;
+  z-index: 999;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Show on hover */
+.tooltip-wrapper:hover .tooltip-reminder {
+  display: block;
+}
+

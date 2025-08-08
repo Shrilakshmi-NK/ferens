@@ -21,16 +21,31 @@
 </head>
 <body>
 
+
+
+
   <div class="ribbon">
-    <h1>Code Comparator</h1>
-    <div>
-      <select id="languageSelector" class="compare-btn" onchange="changeLanguage()">
-        <option value="javascript">JavaScript</option>
-        <option value="python">Python</option>
-        <option value="clike">C++</option>
-      </select>
-      <button class="compare-btn" onclick="compareCode()">Compare</button>
-      <button class="compare-btn" onclick="window.location.href='history.html'">View History</button>
+  <h1>Code Comparator</h1>
+  <div>
+    <select id="languageSelector" class="compare-btn" onchange="changeLanguage()">
+      <option value="javascript">JavaScript</option>
+      <option value="python">Python</option>
+      <option value="clike">C++</option>
+    </select>
+    <button class="compare-btn" onclick="compareCode()">Compare</button>
+    <div class="tooltip-wrapper">
+      <button class="compare-btn" onclick="window.location.href='history.html'">
+        View History
+      </button>
+      <div class="tooltip-reminder">
+        ⚠ This will clear your current code input
+      </div>
+    </div>
+    <button class="compare-btn" onclick="clearHistory()">Clear History</button>
+  </div>
+</div>
+
+
       <button class="compare-btn" onclick="clearHistory()">Clear History</button>
     </div>
   </div>
@@ -41,7 +56,7 @@
       <textarea id="originalCode"></textarea>
     </div>
     <div class="code-box">
-      <label for="userCode">User's Code</label>
+      <label for="userCode">User Code</label>
       <textarea id="userCode"></textarea>
     </div>
   </div>

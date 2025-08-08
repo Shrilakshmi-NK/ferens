@@ -117,3 +117,16 @@ function clearHistory() {
       alert("❌ Failed to clear history.");
     });
 }
+
+// // 👇 Hover Reminder for "View History"
+// const viewHistoryBtn = document.getElementById('viewHistoryBtn');
+// const hoverReminder = document.getElementById('hoverReminder');
+
+// viewHistoryBtn.addEventListener('mouseenter', () => {
+//   hoverReminder.style.display = 'block';
+// });
+
+// viewHistoryBtn.addEventListener('mouseleave', () => {
+//   hoverReminder.style.display = 'none';
+// });
+
