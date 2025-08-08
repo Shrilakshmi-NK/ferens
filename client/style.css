@@ -86,3 +86,41 @@ body {
     width: 100%;
   }
 }
+
+#history-container {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 14px;
+}
+
+.history-item {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.history-item pre {
+  margin: 0;
+  white-space: pre-wrap;
+  font-family: monospace;
+  flex: 1;
+}
+
+.history-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.history-actions input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}

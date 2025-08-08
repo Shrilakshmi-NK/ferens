@@ -7,12 +7,20 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Comparison History</h1>
 
-  <div id="history-container"></div>
+  <div class="ribbon" style="display: flex; justify-content: space-between; align-items: center;">
+    <button class="compare-btn" onclick="window.location.href='interface.html'" style="margin-left: 10px;">🏠 Home</button>
+    <h1 style="margin: 0 auto;">Comparison History</h1>
+  </div>
 
-  <button id="delete-selected">Delete Selected</button>
-  <button id="delete-all">Delete All</button>
+  <div class="container">
+    <div id="history-container" style="width: 100%;"></div>
+
+    <div style="margin-top: 20px;">
+      <button id="delete-selected" class="compare-btn">Delete Selected</button>
+      <button id="delete-all" class="compare-btn">Delete All</button>
+    </div>
+  </div>
 
   <script src="history.js"></script>
 </body>
