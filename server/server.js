@@ -15,11 +15,15 @@ mongoose.connect('mongodb://localhost:27017/codehistory', {
   .then(() => console.log('✅ Connected to MongoDB'))
   .catch((err) => console.error('❌ MongoDB connection error:', err));
 
-
-// ✅ Save comparison history
+// ✅ Save comparison history with duplicate check
 app.post('/save', async (req, res) => {
   const { original, user } = req.body;
   try {
+    // check if it already exists
+    const existing = await History.findOne({ original, user });
+    if (existing) {
+      return res.json({ message: "✅ Already saved, skipping duplicate." });
+    }
     const entry = new History({ original, user });
     await entry.save();
     res.json({ message: "✅ Saved!" });
@@ -28,7 +32,7 @@ app.post('/save', async (req, res) => {
   }
 });
 
-// ✅ Load all history (for history.html)
+// ✅ Load all history
 app.get('/load-history', async (req, res) => {
   try {
     const history = await History.find().sort({ createdAt: -1 });
