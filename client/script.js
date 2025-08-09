@@ -1,24 +1,31 @@
 let originalEditor, userEditor;
 
 window.onload = () => {
-  originalEditor = CodeMirror.fromTextArea(document.getElementById("originalCode"), {
-    lineNumbers: true,
-    mode: "javascript"
-  });
+  // Initialize editors in Python mode by default
+  if (document.getElementById("originalCode")) {
+    originalEditor = CodeMirror.fromTextArea(document.getElementById("originalCode"), {
+      lineNumbers: true,
+      mode: "python"
+    });
+  }
 
-  userEditor = CodeMirror.fromTextArea(document.getElementById("userCode"), {
-    lineNumbers: true,
-    mode: "javascript"
-  });
+  if (document.getElementById("userCode")) {
+    userEditor = CodeMirror.fromTextArea(document.getElementById("userCode"), {
+      lineNumbers: true,
+      mode: "python"
+    });
+  }
 
-  // Optional: Load history on startup
-  // viewHistory();
+  // Only load history if we are on the history page
+  if (document.getElementById("history-container")) {
+    loadHistoryFromSession();
+  }
 };
 
 function changeLanguage() {
   const lang = document.getElementById('languageSelector').value;
-  originalEditor.setOption("mode", lang);
-  userEditor.setOption("mode", lang);
+  if (originalEditor) originalEditor.setOption("mode", lang);
+  if (userEditor) userEditor.setOption("mode", lang);
 }
 
 function escapeHtml(text) {
@@ -66,6 +73,7 @@ async function compareCode() {
   result.innerHTML = html;
   result.style.display = 'block';
 
+  // Save to backend silently
   try {
     const response = await fetch('http://localhost:3000/save', {
       method: 'POST',
@@ -74,51 +82,57 @@ async function compareCode() {
     });
 
     const data = await response.json();
-    console.log(data);
-    alert(data.message || "Saved successfully.");
+    console.log("Save response:", data);
+    // Removed alert
   } catch (err) {
     console.error("Failed to save to backend", err);
-    alert("❌ Failed to save comparison to backend.");
+    // Removed alert
+  }
+
+  // Save to sessionStorage so it’s kept until tab is closed
+  saveHistoryToSession(original, user);
+}
+
+function saveHistoryToSession(original, user) {
+  let history = JSON.parse(sessionStorage.getItem("history")) || [];
+  history.push({
+    original,
+    user,
+    createdAt: new Date().toISOString()
+  });
+  sessionStorage.setItem("history", JSON.stringify(history));
+}
+
+function loadHistoryFromSession() {
+  let history = JSON.parse(sessionStorage.getItem("history")) || [];
+  if (history.length > 0) {
+    const result = document.getElementById('result');
+    result.innerHTML = '<h3>📜 Comparison History (This Session)</h3>';
+    history.forEach(entry => {
+      result.innerHTML += `
+        <strong>${new Date(entry.createdAt).toLocaleString()}</strong><br>
+        <code>Original:</code><br><pre>${escapeHtml(entry.original)}</pre>
+        <code>User:</code><br><pre>${escapeHtml(entry.user)}</pre><hr>
+      `;
+    });
+    result.style.display = 'block';
   }
 }
 
 function viewHistory() {
-  fetch('http://localhost:3000/history')
-    .then(res => res.json())
-    .then(history => {
-      const result = document.getElementById('result');
-      result.innerHTML = '<h3>📜 Comparison History (Backend)</h3>';
-      history.forEach(entry => {
-        result.innerHTML += `
-          <strong>${new Date(entry.createdAt).toLocaleString()}</strong><br>
-          <code>Original:</code><br><pre>${escapeHtml(entry.original)}</pre>
-          <code>User:</code><br><pre>${escapeHtml(entry.user)}</pre><hr>
-        `;
-      });
-      result.style.display = 'block';
-    })
-    .catch(err => {
-      console.error("Error loading history:", err);
-      alert("❌ Failed to fetch history.");
-    });
+  loadHistoryFromSession();
 }
 
 function clearHistory() {
-  fetch('http://localhost:3000/clear', { method: 'DELETE' })
-    .then(() => {
-      const result = document.getElementById('result');
-      result.innerHTML = '🗑️ History cleared successfully!';
-      result.style.display = 'block';
-      result.style.backgroundColor = '#fff3cd';
-      result.style.borderLeft = '4px solid orange';
-    })
-    .catch(err => {
-      console.error("Error clearing history:", err);
-      alert("❌ Failed to clear history.");
-    });
+  sessionStorage.removeItem("history");
+  const result = document.getElementById('result');
+  result.innerHTML = '🗑️ History cleared successfully!';
+  result.style.display = 'block';
+  result.style.backgroundColor = '#fff3cd';
+  result.style.borderLeft = '4px solid orange';
 }
 
-// Toggle dark mode
+// Toggle dark mode (persistent using localStorage)
 document.getElementById("darkModeToggle").addEventListener("click", function () {
   document.body.classList.toggle("dark-mode");
 
