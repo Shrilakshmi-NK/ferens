@@ -23,5 +23,15 @@
   </div>
 
   <script src="history.js"></script>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const theme = localStorage.getItem("theme");
+  if (theme === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+});
+</script>
+
+
 </body>
 </html>

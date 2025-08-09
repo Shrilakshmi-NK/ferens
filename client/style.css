@@ -159,3 +159,51 @@ body {
   display: block;
 }
 
+/* Dark mode base */
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* === Dark mode for the main comparison result area === */
+body.dark-mode #result {
+  background-color: #1f1f1f !important;
+  color: #e0e0e0 !important;
+}
+
+/* Correct lines (green) */
+body.dark-mode #result div[style*="background-color:#e7fbe7"] {
+  background-color: #2a3b2a !important;
+  color: #b9fbc0 !important;
+}
+
+/* Incorrect lines (red) */
+body.dark-mode #result div[style*="background-color:#ffe6e6"] {
+  background-color: #5c1e1e !important;
+  color: #ffcfcf !important;
+}
+
+/* === Dark mode for the history page === */
+body.dark-mode #history-container {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+body.dark-mode .history-item {
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+body.dark-mode .history-item pre {
+  background-color: #1a1a1a;
+  color: #e6e6e6;
+}
+
+body.dark-mode #history-container hr {
+  border-color: #444;
+}
+
+

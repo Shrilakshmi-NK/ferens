@@ -118,15 +118,37 @@ function clearHistory() {
     });
 }
 
-// // 👇 Hover Reminder for "View History"
-// const viewHistoryBtn = document.getElementById('viewHistoryBtn');
-// const hoverReminder = document.getElementById('hoverReminder');
+// Toggle dark mode
+document.getElementById("darkModeToggle").addEventListener("click", function () {
+  document.body.classList.toggle("dark-mode");
 
-// viewHistoryBtn.addEventListener('mouseenter', () => {
-//   hoverReminder.style.display = 'block';
-// });
+  // Save state to localStorage
+  if (document.body.classList.contains("dark-mode")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
 
-// viewHistoryBtn.addEventListener('mouseleave', () => {
-//   hoverReminder.style.display = 'none';
-// });
+  // Toggle CodeMirror theme
+  const editors = document.querySelectorAll(".CodeMirror");
+  editors.forEach(editor => {
+    const cm = editor.CodeMirror;
+    if (cm) {
+      cm.setOption("theme", document.body.classList.contains("dark-mode") ? "darcula" : "default");
+    }
+  });
+});
 
+// On page load, restore theme
+window.addEventListener("DOMContentLoaded", () => {
+  const theme = localStorage.getItem("theme");
+  if (theme === "dark") {
+    document.body.classList.add("dark-mode");
+
+    const editors = document.querySelectorAll(".CodeMirror");
+    editors.forEach(editor => {
+      const cm = editor.CodeMirror;
+      if (cm) cm.setOption("theme", "darcula");
+    });
+  }
+});

@@ -18,6 +18,9 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
+  <!-- Load Dark Theme for CodeMirror -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/darcula.min.css">
+
 </head>
 <body>
 
@@ -25,7 +28,9 @@
 
 
   <div class="ribbon">
-  <h1>Code Comparator</h1>
+  <h1>Ferens</h1>
+  
+  <h6>Code Comparator</h6>
   <div>
     <select id="languageSelector" class="compare-btn" onchange="changeLanguage()">
       <option value="javascript">JavaScript</option>
@@ -41,12 +46,14 @@
         ⚠ This will clear your current code input
       </div>
     </div>
-    <button class="compare-btn" onclick="clearHistory()">Clear History</button>
+    
+  <!-- 🔘 Dark Mode Button placed after View History -->
+  <button id="darkModeToggle" class="compare-btn">Toggle Mode</button>
   </div>
 </div>
 
 
-      <button class="compare-btn" onclick="clearHistory()">Clear History</button>
+     
     </div>
   </div>
 
