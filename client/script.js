@@ -240,7 +240,7 @@ async function compareCode() {
   const userLines = user.split('\n');
   const maxLines = Math.max(originalLines.length, userLines.length);
 
-  let html = `<strong>🔍 Line-by-Line Comparison (Ignoring Comments & Whitespace):</strong><br>`;
+  let html = `<strong>🔍 Line-by-Line Comparison :</strong><br>`;
 
   for (let i = 0; i < maxLines; i++) {
     const orig = originalLines[i] || '';
