@@ -7,22 +7,24 @@ A code comparing platform for beginner coders. The aim is to lets beginner coder
 - **HTML, CSS, JavaScript**
 - **CodeMirror**: Used for rendering and highlighting syntax in both the student and correct code areas.
 - Side-by-side code input and real-time **line-by-line comparison**.
-
-### Backend:
-- **Node.js & Express.js**: Server setup and API routes.
-- **MongoDB + Mongoose**: Used for storing and retrieving comparison history.
-- **Fetch API**: For communication between frontend and backend.
+- Session based history management.
 
 ## Key Features
 - Real-time code comparison between a **student’s solution** and a **reference solution**.
 - Syntax highlighting with **CodeMirror**.
 - Persistent history: Users can **view and revisit** previous code comparisons.
+- Delete selcted and delete all options for easy history clearing.
+- Toggle mode option to switch from light mode to dark mode according to user's convinience. 
 - **Backend development in progress** to support data storage and advanced features.
 
 ## Planned Enhancements
 - **Improved history management**: Better interface for navigating saved comparisons.
 - **Scoring system**: Calculates accuracy score based on line-by-line matches.
 - **AI-based suggestions**: Provides beginner-friendly explanations and improvement tips to help students learn from their mistakes.
+- ### Backend:
+- **Node.js & Express.js**: Server setup and API routes.
+- **MongoDB + Mongoose**: Used for storing and retrieving comparison history.
+- **Fetch API**: For communication between frontend and backend.
 
 ## Learning Outcomes
 - Improved understanding of how to build **full-stack web applications**.
