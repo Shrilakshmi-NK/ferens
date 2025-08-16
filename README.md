@@ -28,7 +28,7 @@ A code comparing platform for beginner coders. The aim is to lets beginner coder
 
 ## Learning Outcomes
 - Improved understanding of how to build **full-stack web applications**.
-- Hands-on experience with **REST APIs**, **NoSQL databases**, and **modern frontend libraries**.
-- Strengthened my frontend-to-backend integration and debugging workflow.
+- Hands-on experience with HTML, CSS and JavaScript and code mirror.
+- Strengthened my frontend database integration and debugging workflow.
 
 
