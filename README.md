@@ -13,7 +13,8 @@ A code comparing platform for beginner coders. The aim is to lets beginner coder
 - Real-time code comparison between a **student’s solution** and a **reference solution**.
 - Syntax highlighting with **CodeMirror**.
 - Persistent history: Users can **view and revisit** previous code comparisons.
-- Delete selcted and delete all options for easy history clearing.
+- Delete selected and delete all options for easy history clearing.
+- Support additional languages like, C, C++, HTML, CSS, JavaScript etc.
 - Toggle mode option to switch from light mode to dark mode according to user's convinience. 
 - **Backend development in progress** to support data storage and advanced features.
 
@@ -29,6 +30,6 @@ A code comparing platform for beginner coders. The aim is to lets beginner coder
 ## Learning Outcomes
 - Improved understanding of how to build **full-stack web applications**.
 - Hands-on experience with HTML, CSS and JavaScript and code mirror.
-- Strengthened my frontend database integration and debugging workflow.
+- Strengthened my frontend-database integration and debugging workflow.
 
 
