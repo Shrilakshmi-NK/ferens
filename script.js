@@ -167,9 +167,14 @@
 //   }
 // });
 
-
+//Creates two variables to store the CodeMirror editors for the original code and user code.
+//We need to keep references to these editors so we can get their content and change settings later.
 let originalEditor, userEditor;
 
+
+//Preprocessing code before comparison
+//Cleans the code for comparison by removing comments, extra spaces, and blank lines.
+//So that small formatting differences don’t affect the comparison.
 function preprocessCodeForCompare(code) {
   return code
     // Remove multi-line comments
@@ -186,6 +191,12 @@ function preprocessCodeForCompare(code) {
     .map(line => line.replace(/\s+/g, " "))
     .join("\n");
 }
+
+//Initialize editors and history on page load
+//Finds the text areas in the page for original and user code.
+// Converts them into CodeMirror editors with line numbers and Python syntax highlighting.
+// Loads previous comparison history if available.
+//It provides syntax highlighting, line numbers, and easier code editing compared to a plain <textarea>.
 
 window.onload = () => {
   if (document.getElementById("originalCode")) {
@@ -213,6 +224,9 @@ function changeLanguage() {
   if (userEditor) userEditor.setOption("mode", lang);
 }
 
+
+//Converts <, >, &, ", ' into safe HTML so they don’t break the page.
+// Why: Without this, code like <div> would be rendered as HTML instead of showing as code.
 function escapeHtml(text) {
   return text.replace(/[&<>"']/g, match => {
     const escapeMap = {
@@ -226,6 +240,13 @@ function escapeHtml(text) {
   });
 }
 
+
+//Compare the code
+//Gets code from both editors.
+// Cleans the code using preprocessCodeForCompare.
+// Compares line by line.
+// Shows green for correct lines and red for differences, with "Expected" vs "Got".
+// Saves the comparison to session storage.
 async function compareCode() {
   const originalRaw = originalEditor.getValue();
   const userRaw = userEditor.getValue();
@@ -277,6 +298,12 @@ function saveHistoryToSession(original, user) {
   sessionStorage.setItem("history", JSON.stringify(history));
 }
 
+//Session storage functions
+// Saves each comparison in the browser session.
+// Loads all previous comparisons.
+// Clears history when requested.
+// Why sessionStorage: Keeps data for the current session without using a backend database. Safer for temporary storage.
+
 function loadHistoryFromSession() {
   let history = JSON.parse(sessionStorage.getItem("history")) || [];
   if (history.length > 0) {
@@ -306,6 +333,10 @@ function clearHistory() {
   result.style.borderLeft = '4px solid orange';
 }
 
+
+// Toggles dark mode for the page and CodeMirror editors.
+// Saves the preference in localStorage to remember it.
+
 document.getElementById("darkModeToggle").addEventListener("click", function () {
   document.body.classList.toggle("dark-mode");
 
@@ -323,6 +354,9 @@ document.getElementById("darkModeToggle").addEventListener("click", function () 
     }
   });
 });
+
+// On page load, applies the saved dark mode preference.
+// So the user doesn’t have to switch to dark mode every time.
 
 window.addEventListener("DOMContentLoaded", () => {
   const theme = localStorage.getItem("theme");

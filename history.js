@@ -85,23 +85,42 @@
 //   });
 // });
 
+//Run code after page loads
+//Waits until the HTML page is fully loaded before running the code.
+//So all elements like history-container, buttons, etc., exist before we try to access them.
 
+
+//Get the container for history
+//Finds the <div> where all past code comparisons will be shown.
+//We need a place to insert the history entries dynamically.
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("history-container");
 
   // Load history from sessionStorage
+  //Retrieves saved code comparisons from the browser’s session.
+  //If nothing is saved, it uses an empty array [].
   let history = JSON.parse(sessionStorage.getItem("history")) || [];
-
+  //Shows a simple message if there are no previous comparisons.
   if (history.length === 0) {
     container.innerHTML = "<p>No history found in this session.</p>";
     return;
   }
 
+  //Loop through each history item
+  //Creates a <div> for each previous code comparison.
+  //Adds a CSS class for styling.
   history.forEach((item, index) => {
     const div = document.createElement("div");
     div.classList.add("history-item");
 
 // Diff function (ignoring whitespace/comments/newlines)
+//Removes comments, extra spaces, and blank lines.
+
+// Splits the code into lines.
+// Compares line by line:
+// Green (same) → <div>
+// Red (difference) → <div class="diff-removed"> or <div class="diff-added">
+// Returns two HTML strings showing the comparison.
 function diffStrings(code1, code2) {
   const normalize = str =>
     str
@@ -131,8 +150,16 @@ function diffStrings(code1, code2) {
   return [result1, result2];
 }
 
-
+    //Highlight code differences
+    //Gets the formatted HTML for the original and user code with differences highlighted.
+    //Makes the comparison visually clear.
     const [highlighted1, highlighted2] = diffStrings(item.original, item.user);
+
+//     Add checkbox and display the code
+//     Shows the two codes side by side with differences.
+// Adds a checkbox to select for deletion.
+// Shows the date/time of comparison.
+// Users can view, select, and manage history easily.
 
     div.innerHTML = `
       <input type="checkbox" class="select-item" data-index="${index}">
@@ -153,6 +180,11 @@ function diffStrings(code1, code2) {
   });
 
   // Delete selected
+//   Finds all checked checkboxes.
+// Deletes the corresponding history entries from sessionStorage.
+// Reloads the page to show updated history.
+
+
   document.getElementById("delete-selected").addEventListener("click", () => {
     const selected = document.querySelectorAll(".select-item:checked");
     let history = JSON.parse(sessionStorage.getItem("history")) || [];
@@ -167,6 +199,8 @@ function diffStrings(code1, code2) {
   });
 
   // Delete all
+  //Clears the entire history from sessionStorage and shows a message.
+//Provides a quick reset option for the user.
   document.getElementById("delete-all").addEventListener("click", () => {
     sessionStorage.removeItem("history");
     container.innerHTML = "<p>History cleared.</p>";
